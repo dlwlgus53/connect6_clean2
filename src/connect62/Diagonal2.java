@@ -24,7 +24,7 @@ public class Diagonal2 extends CheckNScore{
 		enemyColor = myColor*-1;
 		this.writer = writer;
 		
-		findMyFive();
+		findMyFive();//love
 		findMyFour();
 		findMine();
 		findEnemy();

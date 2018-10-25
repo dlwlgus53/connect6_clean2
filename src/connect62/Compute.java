@@ -23,7 +23,7 @@ public class Compute {
 		this.map = map;
 		this.myColor =myColor;
 		scoreMap = new double[map.length][map.length];
-		
+
 		column = new Column(map, scoreMap, myColor, writer);
 		diagonal1 = new Diagonal1(map, scoreMap, myColor, writer);
 		row = new Row(map, scoreMap, myColor, writer);
@@ -31,10 +31,10 @@ public class Compute {
 		make4by4 = new Make4by4(map, scoreMap, myColor, writer);
 		aboutEnemy3 = new AboutEnemy3(map, scoreMap, myColor, writer);
 		findTwoEnemy3 = new FindTwoEnemy3(map, scoreMap, myColor, writer);		
-		
+
 	}
 
-	
+
 
 	public void execute() throws IOException{
 		makeClean(scoreMap);
@@ -47,7 +47,7 @@ public class Compute {
 		scoreMap = make4by4.execute(map, scoreMap, myColor, writer);
 		scoreMap = aboutEnemy3.execute(map, scoreMap, myColor, writer);
 		scoreMap = findTwoEnemy3.execute(map, scoreMap, myColor, writer);
-	
+
 		printMap(scoreMap);
 		result=findResult();
 		map[result[0]][result[1]]= myColor;
@@ -61,7 +61,7 @@ public class Compute {
 		printMap(map);
 		return;
 	}
-	
+
 	void scoreUpdate() throws IOException {
 		scoreMap=column.execute(map, scoreMap, myColor, writer);
 		scoreMap=diagonal1.execute(map, scoreMap, myColor, writer);
@@ -72,8 +72,8 @@ public class Compute {
 		scoreMap = findTwoEnemy3.execute(map, scoreMap, myColor, writer);
 		return;
 	}
-	
-	
+
+
 
 
 	void printMap(double[][] scoreMap2) throws IOException {
@@ -85,24 +85,44 @@ public class Compute {
 		}
 		mapWriter.close();
 	}
-	
+
 	void printMap(int[][] map) throws IOException{
 		FileWriter mapWriter2 = new FileWriter("guimap.txt");
 		mapWriter2.write("map\n");
-		for(int i=0;i<map.length;i++) {
+		mapWriter2.write("|  ");
+		for(int i=0;i< map.length; i++) {
+			if(i<10)
+				mapWriter2.append(i+" |");
+			else
+				mapWriter2.append(i-10+" |");
+		}
+		mapWriter2.append("\n");
+		for(int i=0;i<map.length;i++){
+			if(i<10)
+				mapWriter2.append("|"+i);
+			else
+				mapWriter2.append("|"+(i-10));
 			for(int j=0; j<map[0].length;j++) {
-				if(map[i][j]==0)
-					mapWriter2.append(" ");
+				if(map[i][j]==0) {
+					if(j==5||j==15)
+						mapWriter2.append("|5 ");
+					else if(j==10)
+						mapWriter2.append("|0 ");
+					else
+						mapWriter2.append("|  ");
+				}
+				else if(map[i][j]==-1)	
+					mapWriter2.append("|● ");
 				else if(map[i][j]==1)
-					mapWriter2.append("O");
-				else if(map[i][j]==-1)
-					mapWriter2.append("*");
+					mapWriter2.append("|◆ ");
+			
+
 			}
-			mapWriter2.append("\n");
+			mapWriter2.append("\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ\n");
 		}
 		mapWriter2.close();
 		return;
-		
+
 	}
 
 	void checkAlreadyDone() {

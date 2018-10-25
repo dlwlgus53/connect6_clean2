@@ -11,14 +11,14 @@ public class FindTwoEnemy3 extends CheckNScore{
 	int myColor;
 	int enemyColor;
 	FileWriter writer; 
-	int targetRow;
-	int targetCol;
-	int targetWay;
+	ArrayList<Integer> targetRow = new ArrayList<Integer>(2);
+	ArrayList<Integer> targetCol = new ArrayList<Integer>(2);
+	ArrayList<Integer> targetWay = new ArrayList<Integer>(2);
 
 	FindTwoEnemy3(int[][] map,double[][]scoreMap,int myColor,FileWriter writer) throws IOException{
 		super(map, scoreMap, myColor, writer);
 	}
-	
+
 
 	double[][] execute(int[][] map,double[][]scoreMap,int myColor,FileWriter writer) throws IOException {
 		this.map = map;
@@ -26,45 +26,49 @@ public class FindTwoEnemy3 extends CheckNScore{
 		this.myColor = myColor;
 		enemyColor = myColor*-1;
 		this.writer = writer;
-		
+
 		find();
 		return scoreMap;
 	}
 
 	void find() throws IOException{
-		targetRow=0;
-		targetCol=0;
-		targetWay=0;
-
-		
 
 		int ColTarget = colTargetCheck();
 		int RowTarget = rowTargetCheck();
 		int Dia1Target = dia1TargetCheck();
 		int Dia2Target = dia2TargetCheck();
-		
+
 		//target = in unit enemy : 3 mine : 0
 
-		
+
 		/*
 		if(isColTarget==true)	targetCount++;
 		if(isRowTarget==true)	targetCount++;
 		if(isDia1Target==true)	targetCount++;
 		if(isDia2Target==true)	targetCount++;
-		*/
-		
-		int targetCount = ColTarget + RowTarget + Dia1Target + Dia2Target;
-		
-		if(targetCount>=2) {
-			findResult();
-		}
+		 */
 
+		int targetCount = ColTarget + RowTarget + Dia1Target + Dia2Target;
+
+		if(targetCount>=2) {
+			int row = targetRow.get(0);
+			int col = targetCol.get(0);
+			int way = targetWay.get(0);
+			setStone(row, col, way);
+			row = targetRow.get(1);
+			col = targetCol.get(1);
+			way = targetWay.get(1);
+			setStone(row, col, way);
+		
+		}
 	}
 
 
 	void findResult() throws IOException{
 
-		int tempi= targetRow;
+		//setStone(targetRow, targetCol, targetWay);
+		//System.out.println("what is target Way : " + targetWay);
+		/*int tempi= targetRow;
 		int tempj = targetCol;
 		int way = targetWay;
 
@@ -74,7 +78,6 @@ public class FindTwoEnemy3 extends CheckNScore{
 		}
 
 		if(way==1) {
-
 			setStone(tempi, tempj,1);
 		}
 		if(way==2) {
@@ -83,20 +86,18 @@ public class FindTwoEnemy3 extends CheckNScore{
 
 		if(way==3) {
 			setStone(tempi,tempj,3);
-		}
+		}*/
 
 	}
 
 
-/*
- * target의 수를 int로 받아와.
- * 그래서
- * 아니 그냥 그렇게 하면 될듯.!
- */
+	/*
+	 * target의 수를 int로 받아와.
+	 * 그래서
+	 * 아니 그냥 그렇게 하면 될듯.!
+	 */
 	int colTargetCheck() {
 		int isTarget = 0;
-
-
 		for(int i=0;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 				if(map[i][j]==enemyColor) {
@@ -104,7 +105,6 @@ public class FindTwoEnemy3 extends CheckNScore{
 					boolean isMine = false;
 					unit=copyToColUnit(unit,i,j);
 					int count = 0;
-
 
 					for(int k=0;k<6;k++) {
 						if(unit[k]==enemyColor) {
@@ -114,15 +114,16 @@ public class FindTwoEnemy3 extends CheckNScore{
 							isMine = true;
 					}
 					if(isMine == false && count == 3) {
-						targetRow=i;
-						targetCol=j;
-						targetWay=0;
+						targetRow.add(i);
+						targetCol.add(j);
+						targetWay.add(0);
 						isTarget++;
 					}
 				}
 			}
 
 		}
+
 		return isTarget;
 	}
 
@@ -137,9 +138,8 @@ public class FindTwoEnemy3 extends CheckNScore{
 					int[] unit = new int[6];
 					boolean isMine = false;
 					unit=copyToRowUnit(unit,i,j);
+
 					int count = 0;
-
-
 					for(int k=0;k<6;k++) {
 						if(unit[k]==enemyColor) {
 							count++;
@@ -147,16 +147,18 @@ public class FindTwoEnemy3 extends CheckNScore{
 						if(unit[k]==myColor)
 							isMine = true;
 					}
+
 					if(isMine == false && count == 3) {
-						targetRow=i;
-						targetCol=j;
-						targetWay=1;
+						targetRow.add(i);
+						targetCol.add(j);
+						targetWay.add(1);
 						isTarget++;
 					}
 				}
 			}
 
 		}
+
 		return isTarget;
 	}
 
@@ -184,9 +186,9 @@ public class FindTwoEnemy3 extends CheckNScore{
 					}
 
 					if(isMine == false && count == 3) {
-						targetRow=i;
-						targetCol=j;
-						targetWay=2;
+						targetRow.add(i);
+						targetCol.add(j);
+						targetWay.add(2);
 						isTarget++;
 					}
 				}
@@ -219,9 +221,9 @@ public class FindTwoEnemy3 extends CheckNScore{
 					}
 
 					if(isMine == false && count == 3) {
-						targetRow=i;
-						targetCol=j;
-						targetWay=3;//�밢��2
+						targetRow.add(i);
+						targetCol.add(j);
+						targetWay.add(3);
 						isTarget++;
 					}
 				}
@@ -230,19 +232,7 @@ public class FindTwoEnemy3 extends CheckNScore{
 		}
 		return isTarget;
 
-
-
-
-
-
-
-
 	}
-
-
-
-
-
 
 
 	int littleUnitCounter(int[]unit) {
@@ -288,41 +278,36 @@ public class FindTwoEnemy3 extends CheckNScore{
 		listCol.clear();
 		int tempi = i;
 		int tempj =j;
-				if(way==0) {
-
-
-					for(tempj=j;tempj<j+6;tempj++) {
-						if(scoreMap[i][tempj]==-10000&&tempj>=1) {
-							listRow.add(i);
-							listCol.add(tempj-1);
-						}
-						if(scoreMap[i][tempj]==-10000&&tempj<=map.length-1) {
-							listRow.add(i);
-							listCol.add(tempj+1);
-						}
-					}
-
-
-					while(index<listRow.size()) {
-						if(checkMust(listRow.get(index),listCol.get(index),5.1)){
-							scoreMap[listRow.get(index)][listCol.get(index)]
-									=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)],5.1);
-							writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") col twothree "+ 5.1 +"\n");
-						}
-						index++;
-					}
+		if(way==0) {//col
+			for(tempj=j;tempj<j+6;tempj++) {
+				if(scoreMap[i][tempj]==-10000&&tempj>=1) {
+					listRow.add(i);
+					listCol.add(tempj-1);
 				}
+				if(scoreMap[i][tempj]==-10000&&tempj<=map.length-1) {
+					listRow.add(i);
+					listCol.add(tempj+1);
+				}
+			}
+			while(index<listRow.size()) {
+				if(checkMust(listRow.get(index),listCol.get(index),5.1)){
+					scoreMap[listRow.get(index)][listCol.get(index)]
+							=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)],5.1);
+					writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") col twothree "+ 5.1 +"\n");
+				}
+				index++;
+			}
+		}
 
-		if(way==1) {
-
+		if(way==1) {//row
 
 			for(tempi=i;tempi<i+6;tempi++) {
 				if(scoreMap[tempi][j]==-10000&&tempi>=1) {
-					listRow.add(tempi-1);//����..�����Ѱ�..?
+					listRow.add(tempi-1);
 					listCol.add(j);
 				}
-				if(scoreMap[tempi][j]==-10000&&tempi<map.length-1) {//�̰�  dia1�� �����ؾ� �ϴºκ�
-					listRow.add(tempi+1);//�̰ͱ��� �ؾ����� ���ƾ� ���� �𸣰ھ�//�̰Ŵ� ������
+				if(scoreMap[tempi][j]==-10000&&tempi<map.length-1) {
+					listRow.add(tempi+1);
 					listCol.add(j);
 				}
 			}
@@ -341,11 +326,11 @@ public class FindTwoEnemy3 extends CheckNScore{
 		if(way==2) {
 			for(tempi=i, tempj=j;tempi>i-6;tempj++,tempi--) {
 				if(scoreMap[tempi][tempj]==-10000&&tempj+1<map.length&&tempi-1>=0) {
-					listRow.add(tempi-1);//�밢�� ���� ���� �Ʒ���
+					listRow.add(tempi-1);
 					listCol.add(tempj+1);
 				}
 				if(scoreMap[tempi][tempj]==-10000&&tempj+1>=0&&tempj+1<map.length) {
-					listRow.add(tempi+1);//�밢�� ���� ������ �� ��
+					listRow.add(tempi+1);
 					listCol.add(tempj-1);
 				}
 			}

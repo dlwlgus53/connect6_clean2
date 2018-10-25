@@ -24,6 +24,17 @@ public class Main {
 			System.out.println("oh! me white! you start first");
 		}
 		Compute compute = new Compute(map,myColor);
+		//here is for debug
+		/*
+		map[7][1]=-1;
+		map[7][2]=-1;
+		map[7][3] = -1;
+		map[10][1] = -1;
+		map[10][2] = -1;
+		map[10][3] = -1;
+		map[10][0] = 1;
+				*/
+		
 		
 		while(true) {
 			enemyInput(map,myColor);

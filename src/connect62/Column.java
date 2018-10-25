@@ -339,7 +339,7 @@ public class Column extends CheckNScore {
 		int[] unit = new int[6];
 		for(int i=0;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
-				//if(map[i][j]==enemyColor) {
+				if(map[i][j]==enemyColor) {
 
 					unit=copyToUnit(unit,i,j);
 
@@ -351,7 +351,7 @@ public class Column extends CheckNScore {
 					int blankCol=0;
 					listRow.clear();
 					listCol.clear();
-					boolean isMine=false;//�̰Ŵٶ�		2			
+					boolean isMine=false;	
 					
 					for(k=0;k<6;k++) {
 						if(unit[k]==myColor)
@@ -368,7 +368,7 @@ public class Column extends CheckNScore {
 							if(unit[k]==0) {
 								blank=k;
 							}
-						}//�̰� ����
+						}
 						
 						blankRow = i;
 						blankCol = j+blank;
@@ -377,7 +377,7 @@ public class Column extends CheckNScore {
 							if(checkMust(blankRow,blankCol,4.1)) {
 								scoreMap[blankRow][blankCol]=scoreMust(scoreMap[blankRow][blankCol],4.1);
 								writer.append("(" + blankRow + "," + blankCol + ") col findEne4 "+ 4.1+"\n");
-								return;//�̰͵� �ؾ���.
+								return;
 							}
 							
 						}
@@ -404,18 +404,11 @@ public class Column extends CheckNScore {
 							index++;
 						}
 					}
-				//}
+				}
 			}
 
 
 		}
-
-
-
-
-
-
-
 	}
 
 

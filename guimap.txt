@@ -5,12 +5,12 @@ map
                    
                    
                    
-                   
-                   
-       OOO         
+          * O      
+       O****OO     
+       OOO**       
        O**         
-        *          
-                   
+      O**          
+       O           
                    
                    
                    

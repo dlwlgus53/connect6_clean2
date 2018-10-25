@@ -334,10 +334,6 @@ public class Row extends CheckNScore{
 		}
 	}
 
-
-
-
-
 	void findEnemyFour() throws IOException {
 		ArrayList<Integer> listRow = new ArrayList<Integer>(0);//row�� ���� ����Ʈ
 		ArrayList<Integer> listCol = new ArrayList<Integer>(0);//col�� ���� ����Ʈ
@@ -346,7 +342,7 @@ public class Row extends CheckNScore{
 
 		for(int i=0;i<map.length-6+1;i++) {
 			for(int j=0;j<map.length;j++) {
-				//if(map[i][j]==enemyColor) {
+				if(map[i][j]==enemyColor) {
 
 					unit=copyToUnit(unit,i,j);
 					int k=0;
@@ -410,7 +406,7 @@ public class Row extends CheckNScore{
 							index++;
 						}
 					}
-				//}
+				}
 
 
 			}

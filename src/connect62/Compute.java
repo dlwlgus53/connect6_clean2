@@ -58,7 +58,8 @@ public class Compute {
 		checkAlreadyDone();
 		System.out.println("second Row : " + result[0] +" second Col : " + result[1]);
 		writer.close();
-		printMap(map);
+		printMap2(map);//gui like things
+		
 		return;
 	}
 
@@ -121,6 +122,44 @@ public class Compute {
 			mapWriter2.append("\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ\n");
 		}
 		mapWriter2.close();
+		return;
+
+	}
+	
+	void printMap2(int[][] map) throws IOException{
+		System.out.print("map\n");
+		System.out.print("|  ");
+		for(int i=0;i< map.length; i++) {
+			if(i<10)
+				System.out.print(i+" |");
+			else
+				System.out.print(i-10+" |");
+		}
+		System.out.print("\n");
+		for(int i=0;i<map.length;i++){
+			if(i<10)
+				System.out.print("|"+i);
+			else
+				System.out.print("|"+(i-10));
+			for(int j=0; j<map[0].length;j++) {
+				if(map[i][j]==0) {
+					if(j==5||j==15)
+						System.out.print("|5 ");
+					else if(j==10)
+						System.out.print("|0 ");
+					else
+						System.out.print("|  ");
+				}
+				else if(map[i][j]==-1)	
+					System.out.print("|● ");
+				else if(map[i][j]==1)
+					System.out.print("|◆ ");
+			
+
+			}
+			System.out.print("\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ\n");
+		}
+	
 		return;
 
 	}

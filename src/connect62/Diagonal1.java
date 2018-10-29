@@ -349,7 +349,7 @@ public class Diagonal1 extends CheckNScore{
 		int[] unit = new int[6];
 		for(int i=5;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
-				//if(map[i][j]==enemyColor) {
+				if(map[i][j]==enemyColor) {
 
 				unit=copyToUnit(unit,i,j);
 
@@ -417,7 +417,7 @@ public class Diagonal1 extends CheckNScore{
 					index++;
 					}
 				}
-			//}
+			}
 		}
 		}
 

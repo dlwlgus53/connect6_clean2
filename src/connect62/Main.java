@@ -25,15 +25,15 @@ public class Main {
 		}
 		Compute compute = new Compute(map,myColor);
 		//here is for debug
-		/*
-		map[7][1]=-1;
-		map[7][2]=-1;
-		map[7][3] = -1;
-		map[10][1] = -1;
-		map[10][2] = -1;
-		map[10][3] = -1;
-		map[10][0] = 1;
-				*/
+		
+		/*map[9][8]=-1;
+		map[9][9]=-1;
+		map[9][10] = -1;
+		map[9][11] = -1;
+		map[8][13] = 1;
+		map[7][13] = 1;
+		map[6][13] = 1;*/
+				
 		
 		
 		while(true) {

@@ -31,7 +31,7 @@ public class Column extends CheckNScore {
 		findMyFive();
 		findMyFour();
 		findEnemyFive();
-		findEnemyFour();
+		//findEnemyFour();
 		findMine();
 		findEnemy();
 
@@ -332,85 +332,6 @@ public class Column extends CheckNScore {
 		}
 	}
 
-	void findEnemyFour() throws IOException{
-		ArrayList<Integer> listRow = new ArrayList<Integer>(0);//row�� ���� ����Ʈ
-		ArrayList<Integer> listCol = new ArrayList<Integer>(0);//col�� ���� ����Ʈ
-
-		int[] unit = new int[6];
-		for(int i=0;i<map.length;i++) {
-			for(int j=0;j<map.length-6+1;j++) {
-				if(map[i][j]==enemyColor) {
-
-					unit=copyToUnit(unit,i,j);
-
-					int k=0;
-					int count=0;
-					int index =0;
-					int blank=0;
-					int blankRow=0;
-					int blankCol=0;
-					listRow.clear();
-					listCol.clear();
-					boolean isMine=false;	
-					
-					for(k=0;k<6;k++) {
-						if(unit[k]==myColor)
-							isMine = true;
-						if(unit[k]==enemyColor)
-							count++;
-					}
-					
-				
-					
-
-					if(isMine==false&&count==4) {
-						for(k=0;k<4;k++) {
-							if(unit[k]==0) {
-								blank=k;
-							}
-						}
-						
-						blankRow = i;
-						blankCol = j+blank;
-						
-						if(blank!=0) {
-							if(checkMust(blankRow,blankCol,4.1)) {
-								scoreMap[blankRow][blankCol]=scoreMust(scoreMap[blankRow][blankCol],4.1);
-								writer.append("(" + blankRow + "," + blankCol + ") col findEne4 "+ 4.1+"\n");
-								return;
-							}
-							
-						}
-						
-						int tempj = j;
-						for(tempj=j;tempj<j+6;tempj++) {
-							if(scoreMap[i][tempj]==-10000&&tempj>=1) {
-								listRow.add(i);
-								listCol.add(tempj-1);
-							}
-							if(scoreMap[i][tempj]==-10000&&tempj<=map.length-1) {
-								listRow.add(i);
-								listCol.add(tempj+1);
-							}
-						}
-
-
-						while(index<listRow.size()) {
-							if(checkMust(listRow.get(index),listCol.get(index),4.1)){
-								scoreMap[listRow.get(index)][listCol.get(index)]
-										=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)],4.1);
-								writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") col findene4 "+ 4.1 +"\n");
-							}
-							index++;
-						}
-					}
-				}
-			}
-
-
-		}
-	}
-
 
 	int[]copyToUnit(int[]unit, int row, int col){
 
@@ -424,6 +345,44 @@ public class Column extends CheckNScore {
 
 		return unit;
 	}
+	double scoreCase(int row, int col) {
+		double score = 0;
+		if(0<=col&&col<19&&0<=row&&row<19) {//범위검사
+			if(map[row][col]==0)
+			return scoreMap[row][col];
+		}
+		return score;
+	}
+	
+	int findMax(double case1, double case2, double case3) {
+		
+		if(case1>=case2) {
+			if(case1>=case3)
+				return 1;
+		}
+		if(case2>=case1) {
+			if(case2>=case3) {
+				return 2;
+			}
+		}
+		if(case3>=case2) {
+			if(case3>=case1) {
+				return 3;
+			}
+		}
+		
+		return 0;
+
+	}
+	
+	void stone4(int row, int col) throws IOException {
+		if(checkMust(row,col,4.1)) {
+			scoreMap[row][col]=scoreMust(scoreMap[row][col],4.1);
+			writer.append("(" +row+ "," + col + ") col findEne4 "+ 4.1+"\n");
+			return;
+		}
+	}
+	
 
 	
 

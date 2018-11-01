@@ -29,7 +29,6 @@ public class Row extends CheckNScore{
 		findMine();
 		findEnemy();
 		findEnemyFive();
-		findEnemyFour();
 		return scoreMap;
 	}
 
@@ -334,87 +333,7 @@ public class Row extends CheckNScore{
 		}
 	}
 
-	void findEnemyFour() throws IOException {
-		ArrayList<Integer> listRow = new ArrayList<Integer>(0);//row�� ���� ����Ʈ
-		ArrayList<Integer> listCol = new ArrayList<Integer>(0);//col�� ���� ����Ʈ
 
-		int[] unit = new int[6];
-
-		for(int i=0;i<map.length-6+1;i++) {
-			for(int j=0;j<map.length;j++) {
-				if(map[i][j]==enemyColor) {
-
-					unit=copyToUnit(unit,i,j);
-					int k=0;
-					int count=0;
-					int index =0;
-					int blank=0;
-					int blankRow=0;
-					int blankCol=0;
-					listRow.clear();
-					listCol.clear();
-					boolean isMine=false;				
-
-
-
-					for(k=0;k<6;k++) {
-						if(unit[k]==myColor)
-							isMine = true;
-						if(unit[k]==enemyColor)
-							count++;
-					}
-
-					if(isMine==false&&count==4) {
-						for(k=0;k<4;k++) {
-							if(unit[k]==0) {
-								blank=k;
-							}
-						}
-						
-						blankRow = i+blank;
-						blankCol = j;
-
-						if(blank!=0) {
-							if(checkMust(blankRow,blankCol,4.2)) {
-								scoreMap[blankRow][blankCol]=scoreMust(scoreMap[blankRow][blankCol],4.2);
-								writer.append("(" + blankRow + "," + blankCol + ") dia2 findEne4 "+ 4.2+"\n");
-								return;
-							}
-							
-						}
-						
-						int tempi = i;
-						for(tempi=i;tempi<i+6;tempi++) {
-							if(scoreMap[tempi][j]==-10000&&tempi>=1) {
-								listRow.add(tempi-1);//����..�����Ѱ�..?
-								listCol.add(j);
-							}
-							if(scoreMap[tempi][j]==-10000&&tempi<map.length-1) {//�̰�  dia1�� �����ؾ� �ϴºκ�
-								listRow.add(tempi+1);//�̰ͱ��� �ؾ����� ���ƾ� ���� �𸣰ھ�//�̰Ŵ� ������
-								listCol.add(j);
-							}
-						}
-
-
-
-						while(index<listRow.size()) {
-							if(checkMust(listRow.get(index),listCol.get(index),4.2)){
-								scoreMap[listRow.get(index)][listCol.get(index)]
-										=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)], 4.2);
-								writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") row findene4 "+ 4.2 +"\n");
-							}
-							index++;
-						}
-					}
-				}
-
-
-			}
-		}
-
-	}
-
-	
 
 
 

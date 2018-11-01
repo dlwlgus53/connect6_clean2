@@ -13,7 +13,7 @@ public class Diagonal1 extends CheckNScore{
 
 	Diagonal1 (int[][] map,double[][]scoreMap,int myColor,FileWriter writer) throws IOException{
 		super(map, scoreMap, myColor, writer);
-		
+
 	}
 
 	double[][] execute(int[][] map,double[][]scoreMap,int myColor,FileWriter writer) throws IOException { 
@@ -23,13 +23,12 @@ public class Diagonal1 extends CheckNScore{
 		this.myColor = myColor;
 		enemyColor = myColor*-1;
 		this.writer = writer;
-		
+
 		findMyFive();
 		findMyFour();
 		findMine();
 		findEnemy();
 		findEnemyFive();
-		findEnemyFour();
 		return scoreMap;
 	}
 
@@ -145,7 +144,7 @@ public class Diagonal1 extends CheckNScore{
 						for(tempj=j,tempi=i;tempj<j+6&&tempi>i-6 ;tempj++,tempi--) {
 							if(check(tempi,tempj)) {
 								scoreMap[tempi][tempj]+=20;
-							writer.append("(" + tempi + "," + tempj + ") dia1 findmy2 "+ 40 +"\n");
+								writer.append("(" + tempi + "," + tempj + ") dia1 findmy2 "+ 40 +"\n");
 							}
 						}
 						break;
@@ -319,7 +318,7 @@ public class Diagonal1 extends CheckNScore{
 						}
 					}
 
-				
+
 
 					if(blank==4) {
 						if(i+1<map.length&&j-1>=0&&checkMust(i+1,j-1,3)){
@@ -342,104 +341,28 @@ public class Diagonal1 extends CheckNScore{
 		}
 	}
 
-		
-	void findEnemyFour() throws IOException {
-		ArrayList<Integer> listRow = new ArrayList<Integer>(0);
-		ArrayList<Integer> listCol = new ArrayList<Integer>(0);
-		int[] unit = new int[6];
-		for(int i=5;i<map.length;i++) {
-			for(int j=0;j<map.length-6+1;j++) {
-				if(map[i][j]==enemyColor) {
-
-				unit=copyToUnit(unit,i,j);
-
-				int k=0;
-				int count=0;
-				int index =0;
-				int tempi=0;
-				int tempj=0;
-				int blank=0;
-				int blankRow=0;
-				int blankCol=0;
-				listRow.clear();
-				listCol.clear();
-				boolean isMine=false;			
-				
-
-				for(k=0;k<6;k++) {
-					if(unit[k]==myColor)
-						isMine = true;
-					if(unit[k]==enemyColor)
-						count++;
-				}
-
-				if(isMine==false&&count==4) {
-					for(k=0;k<4;k++) {
-						if(unit[k]==0) {
-							blank=k;
-						}
-					}
-					
-					blankRow = i-blank;
-					blankCol = j+blank;
-					
-					
-					if(blank!=0) {
-						if(checkMust(blankRow,blankCol,4.3)) {
-							scoreMap[blankRow][blankCol]=scoreMust(scoreMap[blankRow][blankCol],4.3);
-							writer.append("(" + blankRow + "," + blankCol + ") dia1 findEne4 "+ 4.3+"\n");
-							return;
-						}
-						
-					}
-					
-
-					
-					for(tempi=i, tempj=j;tempi>i-6;tempj++,tempi--) {
-						if(scoreMap[tempi][tempj]==-10000&&tempj+1<map.length&&tempi-1>=0) {
-							listRow.add(tempi-1);
-							listCol.add(tempj+1);
-						}
-						if(scoreMap[tempi][tempj]==-10000&&tempj+1>=0&&tempj+1<map.length) {
-							listRow.add(tempi+1);
-							listCol.add(tempj-1);
-						}
-					}
 
 
-					while(index<listRow.size()) {
-						
-					if(checkMust(listRow.get(index),listCol.get(index),4.3)){
-						scoreMap[listRow.get(index)][listCol.get(index)]
-								=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)],4.3);
-						writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") dia1 findene4 "+ 4.3 +"\n");
-					}
-					index++;
-					}
-				}
-			}
-		}
-		}
 
+
+
+
+
+
+	int[]copyToUnit(int[]unit, int row, int col){
+
+		int k=0;
+		unit[k] = map[row][col];
+		unit[k+1]=map[row-1][col+1];
+		unit[k+2]=map[row-2][col+2];
+		unit[k+3]=map[row-3][col+3];
+		unit[k+4]=map[row-4][col+4];
+		unit[k+5]=map[row-5][col+5];
+
+		return unit;
 	}
-	
-	
-
-		 
-		int[]copyToUnit(int[]unit, int row, int col){
-
-			int k=0;
-			unit[k] = map[row][col];
-			unit[k+1]=map[row-1][col+1];
-			unit[k+2]=map[row-2][col+2];
-			unit[k+3]=map[row-3][col+3];
-			unit[k+4]=map[row-4][col+4];
-			unit[k+5]=map[row-5][col+5];
-
-			return unit;
-		}
 
 
-	}
+}
 
 

@@ -18,6 +18,7 @@ public class Compute {
 	FileWriter writer;
 	FileWriter mapWriter;
 	FindTwoEnemy3 findTwoEnemy3;
+	AboutEnemy4 aboutEnemy4;
 
 	Compute(int[][]map, int myColor) throws IOException{
 		this.map = map;
@@ -30,7 +31,8 @@ public class Compute {
 		diagonal2 = new Diagonal2(map, scoreMap, myColor, writer);
 		make4by4 = new Make4by4(map, scoreMap, myColor, writer);
 		aboutEnemy3 = new AboutEnemy3(map, scoreMap, myColor, writer);
-		findTwoEnemy3 = new FindTwoEnemy3(map, scoreMap, myColor, writer);		
+		findTwoEnemy3 = new FindTwoEnemy3(map, scoreMap, myColor, writer);
+		aboutEnemy4 = new AboutEnemy4(map, scoreMap, myColor, writer);
 
 	}
 
@@ -40,6 +42,7 @@ public class Compute {
 		makeClean(scoreMap);
 		FileWriter writer = new FileWriter("log.txt");
 		checkAlreadyDone();
+		
 		scoreMap=column.execute(map, scoreMap, myColor, writer);
 		scoreMap=diagonal1.execute(map, scoreMap, myColor, writer);
 		scoreMap = row.execute(map, scoreMap, myColor, writer);
@@ -47,6 +50,7 @@ public class Compute {
 		scoreMap = make4by4.execute(map, scoreMap, myColor, writer);
 		scoreMap = aboutEnemy3.execute(map, scoreMap, myColor, writer);
 		scoreMap = findTwoEnemy3.execute(map, scoreMap, myColor, writer);
+		scoreMap = aboutEnemy4.execute(map, scoreMap, myColor, writer);
 
 		printMap(scoreMap);
 		result=findResult();

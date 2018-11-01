@@ -29,7 +29,6 @@ public class Diagonal2 extends CheckNScore{
 		findMine();
 		findEnemy();
 		findEnemyFive();
-		findEnemyFour();
 		return scoreMap;
 	}
 
@@ -337,86 +336,11 @@ public class Diagonal2 extends CheckNScore{
 		}
 	}
 
-	void findEnemyFour() throws IOException {
-		ArrayList<Integer> listRow = new ArrayList<Integer>(0);//row�� ���� ����Ʈ
-		ArrayList<Integer> listCol = new ArrayList<Integer>(0);//col�� ���� ����Ʈ
-		int[] unit = new int[6];
-		for(int i=5;i<map.length;i++) {
-			for(int j=5;j<map.length;j++) {
-				if(map[i][j]==enemyColor) {
-					unit=copyToUnit(unit,i,j);
-
-					int k=0;
-					int count=0;
-					int index =0;
-					int tempi=0;
-					int tempj=0;
-					int blank=0;
-					int blankRow=0;
-					int blankCol=0;
-					listRow.clear();
-					listCol.clear();
-					boolean isMine=false;//�̰Ŵٶ�					
-
-
-					for(k=0;k<6;k++) {
-						if(unit[k]==myColor)
-							isMine = true;
-						if(unit[k]==enemyColor)
-							count++;
-					}
-
-					if(isMine==false&&count==4) {
-						for(k=0;k<4;k++) {
-							if(unit[k]==0) {
-								blank=k;
-							}
-						}//�̰� ����
-
-						blankRow = i-blank;
-						blankCol = j-blank;
-
-						if(blank!=0) {
-							if(checkMust(blankRow,blankCol,4.4)) {
-								scoreMap[blankRow][blankCol]=scoreMust(scoreMap[blankRow][blankCol],4.4);
-								writer.append("(" + blankRow + "," + blankCol + ") dia2 findEne4 "+ 4.4+"\n");
-								return;//�̰͵� �ؾ���.
-							}
-
-						}//�̰� ���� 5ģ������ ������ž�, ���� �ٲ����.
-
-
-						for(tempi=i, tempj=j;tempi>i-6;tempj--,tempi--) {
-							if(scoreMap[tempi][tempj]==-10000&&tempj-1>=0&&tempi-1>=0) {
-								listRow.add(tempi-1);//�밢�� ���� ���� �Ʒ���
-								listCol.add(tempj-1);
-							}
-							if(scoreMap[tempi][tempj]==-10000&&tempj+1<map.length&&tempi+1<map.length) {
-								listRow.add(tempi+1);//�밢�� ���� ������ �� ��
-								listCol.add(tempj+1);
-							}
-						}
+	
 
 
 
-						while(index<listRow.size()) {
-
-							if(checkMust(listRow.get(index), listCol.get(index), 4.4)){
-								scoreMap[listRow.get(index)][listCol.get(index)]
-										=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)],4.4);
-								writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") dia2 findene4 "+ 4.4 +"\n");
-							}
-
-							index++;
-						}
-					}
-				}
-			}
-		}
-
-
-
-	}
+	
 
 
 

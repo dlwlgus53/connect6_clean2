@@ -90,16 +90,16 @@ public class Make4by4 extends CheckNScore{
 					if(target[0]==true) {//column
 						for(tempi=i,tempj=j;tempj<j+6;tempj++) {
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=100;//
-								writer.append("(" + tempi + "," + tempj + ") col4by4 " + 100 +"\n");
+								scoreMap[tempi][tempj]+=1000;//
+								writer.append("(" + tempi + "," + tempj + ") col4by4 " + 1000 +"\n");
 							}
 						}//this is for targetColumn
 					}
 					if(target[1]==true) {//row
 						for(tempj=j,tempi=i;tempi<i+6;tempi++) {
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=100;//�� �� ��ó�� 20�� �帳�ϴ�~
-								writer.append("(" + tempi + "," + tempj + ") row4by4 " + 100 +"\n");
+								scoreMap[tempi][tempj]+=1000;//�� �� ��ó�� 20�� �帳�ϴ�~
+								writer.append("(" + tempi + "," + tempj + ") row4by4 " + 1000 +"\n");
 							}
 						}
 
@@ -107,8 +107,8 @@ public class Make4by4 extends CheckNScore{
 					if(target[2]==true) {//dia1
 						for(tempj=j,tempi=i ;tempj<j+6;tempi--,tempj++) {
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=100;//�� �� ��ó�� 20�� �帳�ϴ�~
-								writer.append("(" + tempi + "," + tempj + ") dia14by4 " + 100 +"\n");
+								scoreMap[tempi][tempj]+=1000;//�� �� ��ó�� 20�� �帳�ϴ�~
+								writer.append("(" + tempi + "," + tempj + ") dia14by4 " + 1000 +"\n");
 							}
 						}
 
@@ -116,8 +116,8 @@ public class Make4by4 extends CheckNScore{
 					if(target[3]==true) {//dai2
 						for(tempj=j,tempi=i;tempj<j+6;tempj++,tempi--) {
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=100;//�� �� ��ó�� 20�� �帳�ϴ�~
-								writer.append("(" + tempi + "," + tempj + ") dia24by4 " + 100 +"\n");
+								scoreMap[tempi][tempj]+=1000;//�� �� ��ó�� 20�� �帳�ϴ�~
+								writer.append("(" + tempi + "," + tempj + ") dia24by4 " + 1000 +"\n");
 							}
 			
 						}

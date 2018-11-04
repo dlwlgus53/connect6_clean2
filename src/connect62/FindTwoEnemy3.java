@@ -27,6 +27,10 @@ public class FindTwoEnemy3 extends CheckNScore{
 		enemyColor = myColor*-1;
 		this.writer = writer;
 
+		targetRow.clear();
+		targetCol.clear();
+		targetWay.clear();
+
 		find();
 		return scoreMap;
 	}
@@ -38,64 +42,23 @@ public class FindTwoEnemy3 extends CheckNScore{
 		int Dia1Target = dia1TargetCheck();
 		int Dia2Target = dia2TargetCheck();
 
-		//target = in unit enemy : 3 mine : 0
-
-
-		/*
-		if(isColTarget==true)	targetCount++;
-		if(isRowTarget==true)	targetCount++;
-		if(isDia1Target==true)	targetCount++;
-		if(isDia2Target==true)	targetCount++;
-		 */
 
 		int targetCount = ColTarget + RowTarget + Dia1Target + Dia2Target;
-
+		System.out.println("targetcount  : " + targetCount);
 		if(targetCount>=2) {
 			int row = targetRow.get(0);
 			int col = targetCol.get(0);
 			int way = targetWay.get(0);
+			System.out.println("targetrow: targetcol  = " + row +" : " +col);
 			setStone(row, col, way);
-			row = targetRow.get(1);
-			col = targetCol.get(1);
-			way = targetWay.get(1);
-			setStone(row, col, way);
-		
+
 		}
 	}
 
 
-	void findResult() throws IOException{
-
-		//setStone(targetRow, targetCol, targetWay);
-		//System.out.println("what is target Way : " + targetWay);
-		/*int tempi= targetRow;
-		int tempj = targetCol;
-		int way = targetWay;
 
 
-		if(way==0) {
-			setStone(tempi, tempj, 0);
-		}
 
-		if(way==1) {
-			setStone(tempi, tempj,1);
-		}
-		if(way==2) {
-			setStone(tempi, tempj, 2);
-		}
-
-		if(way==3) {
-			setStone(tempi,tempj,3);
-		}*/
-
-	}
-
-
-	/*
-	 * target의 수를 int로 받아와.
-	 * 그래서
-	 * 아니 그냥 그렇게 하면 될듯.!
-	 */
 	int colTargetCheck() {
 		int isTarget = 0;
 		for(int i=0;i<map.length;i++) {
@@ -271,109 +234,239 @@ public class FindTwoEnemy3 extends CheckNScore{
 	}
 
 	void setStone(int i, int j, int way) throws IOException{
-		ArrayList<Integer> listRow = new ArrayList<Integer>(0);
-		ArrayList<Integer> listCol = new ArrayList<Integer>(0);
-		int index =0;
-		listRow.clear();
-		listCol.clear();
-		int tempi = i;
-		int tempj =j;
+
+		double[] score = new double[6];
+		int[] frontRow = new int[3];
+		int[] frontCol = new int[3];
+		int[] rearRow = new int[3];
+		int[] rearCol = new int[3];
+		int blankRow=0;
+		int blankCol=0;
+		int blank=0;
+
+
 		if(way==0) {//col
-			for(tempj=j;tempj<j+6;tempj++) {
-				if(scoreMap[i][tempj]==-10000&&tempj>=1) {
-					listRow.add(i);
-					listCol.add(tempj-1);
-				}
-				if(scoreMap[i][tempj]==-10000&&tempj<=map.length-1) {
-					listRow.add(i);
-					listCol.add(tempj+1);
-				}
+			blank=findBlank(i,j,0);
+
+			if(blank!=0) {
+				blankRow = i;
+				blankCol = j+blank;
+				stone3(blankRow, blankCol, 5.1);
+				return;
 			}
-			while(index<listRow.size()) {
-				if(checkMust(listRow.get(index),listCol.get(index),5.1)){
-					scoreMap[listRow.get(index)][listCol.get(index)]
-							=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)],5.1);
-					writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") col twothree "+ 5.1 +"\n");
-				}
-				index++;
+
+			if(blank==0) {//연속 3개
+
+
+				System.out.println("0");
+				frontRow[0] = i;	frontRow[1] = i; frontRow[2] = i;
+				frontCol[0] = j-1;	frontCol[1] = j-2; frontCol[2] = j-3;
+
+				rearRow[0] = i;	rearRow[1] = i; rearRow[2] = i;
+				rearCol[0] = j+3;	rearCol[1] = j+4; rearCol[2] = j+5;
+
+				score=makeScore(frontRow, frontCol, rearRow, rearCol);
+
+
+				int maxCase = findMax(score);
+
+				make_stone3(maxCase, frontRow, frontCol, rearRow, rearCol);
+
+				return;			
 			}
 		}
-
 		if(way==1) {//row
+			System.out.println("row!");
+			blank=findBlank(i,j,1);
+			System.out.println("blank : " + blank);
+			if(blank!=0) {
+				blankRow = i;
+				blankCol = j+blank;
+				stone3(blankRow, blankCol, 5.2);
+				return;
+			}
 
-			for(tempi=i;tempi<i+6;tempi++) {
-				if(scoreMap[tempi][j]==-10000&&tempi>=1) {
-					listRow.add(tempi-1);
-					listCol.add(j);
-				}
-				if(scoreMap[tempi][j]==-10000&&tempi<map.length-1) {
-					listRow.add(tempi+1);
-					listCol.add(j);
-				}
+			if(blank==0) {//연속 3개
+				System.out.println("1");
+				frontRow[0] = i-1;	frontRow[1] = i-2; frontRow[2] = i-3;
+				frontCol[0] = j;	frontCol[1] = j; frontCol[2] = j;
+
+				rearRow[0] = i+3;	rearRow[1] = i+4; rearRow[2] = i+5;
+				rearCol[0] = j;	rearCol[1] = j; rearCol[2] = j;
+
+				score=makeScore(frontRow, frontCol, rearRow, rearCol);
+
+
+				int maxCase = findMax(score);
+
+				make_stone3(maxCase, frontRow, frontCol, rearRow, rearCol);
+
+				return;			
 			}
 
 
-
-			while(index<listRow.size()) {
-				if(checkMust(listRow.get(index),listCol.get(index),5.2)){
-					scoreMap[listRow.get(index)][listCol.get(index)]
-							=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)], 5.2);
-					writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") row twothree"+ 5.2 +"\n");
-				}
-				index++;
-			}
 		}
-		if(way==2) {
-			for(tempi=i, tempj=j;tempi>i-6;tempj++,tempi--) {
-				if(scoreMap[tempi][tempj]==-10000&&tempj+1<map.length&&tempi-1>=0) {
-					listRow.add(tempi-1);
-					listCol.add(tempj+1);
-				}
-				if(scoreMap[tempi][tempj]==-10000&&tempj+1>=0&&tempj+1<map.length) {
-					listRow.add(tempi+1);
-					listCol.add(tempj-1);
-				}
+
+		if(way==2) {//dai1
+			blank=findBlank(i,j,2);
+
+			if(blank!=0) {
+				blankRow = i;
+				blankCol = j+blank;
+				stone3(blankRow, blankCol, 5.3);
+				return;
 			}
 
+			if(blank==0) {//연속 3개
+				System.out.println("3");
+				frontRow[0] = i+1;	frontRow[1] = i+2; frontRow[2] = i+3;
+				frontCol[0] = j-1;	frontCol[1] = j-2; frontCol[2] = j-3;
 
-			while(index<listRow.size()) {
+				rearRow[0] = i-3;	rearRow[1] = i-4; rearRow[2] = i-5;
+				rearCol[0] = j+3;	rearCol[1] = j+4; rearCol[2] = j+5;
 
-				if(checkMust(listRow.get(index),listCol.get(index),5.3)){
-					scoreMap[listRow.get(index)][listCol.get(index)]
-							=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)],5.3);
-					writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") dia1 twoThree "+ 5.3 +"\n");
-				}
-				index++;
+				score=makeScore(frontRow, frontCol, rearRow, rearCol);
+
+
+				int maxCase = findMax(score);
+
+				make_stone3(maxCase, frontRow, frontCol, rearRow, rearCol);
+
+				return;			
 			}
+
 		}
-		if(way==3) {
 
-			for(tempi=i, tempj=j;tempi>i-6;tempj--,tempi--) {
-				if(scoreMap[tempi][tempj]==-10000&&tempj-1>=0&&tempi-1>=0) {
-					listRow.add(tempi-1);//�밢�� ���� ���� �Ʒ���
-					listCol.add(tempj-1);
-				}
-				if(scoreMap[tempi][tempj]==-10000&&tempj+1<map.length&&tempi+1<map.length) {
-					listRow.add(tempi+1);//�밢�� ���� ������ �� ��
-					listCol.add(tempj+1);
-				}
+		if(way==3) {//dai1
+			blank=findBlank(i,j,3);
+
+			if(blank!=0) {
+				blankRow = i;
+				blankCol = j+blank;
+				stone3(blankRow, blankCol, 5.4);
+				return;
 			}
 
+			if(blank==0) {//연속 3개
+				System.out.println("4");
+				frontRow[0] = i+1;	frontRow[1] = i+2; frontRow[2] = i+3;
+				frontCol[0] = j+1;	frontCol[1] = j+2; frontCol[2] = j+3;
+
+				rearRow[0] = i-3;	rearRow[1] = i-4; rearRow[2] = i-5;
+				rearCol[0] = j-3;	rearCol[1] = j-4; rearCol[2] = j-5;
+
+				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 
 
-			while(index<listRow.size()) {
+				int maxCase = findMax(score);
 
-				if(checkMust(listRow.get(index), listCol.get(index), 5.4)){
-					scoreMap[listRow.get(index)][listCol.get(index)]
-							=scoreMust(scoreMap[listRow.get(index)][listCol.get(index)],5.4);
-					writer.append("(" + listRow.get(index) + "," + listCol.get(index) + ") dia2 twoThree "+ 5.4 +"\n");
-				}
+				make_stone3(maxCase, frontRow, frontCol, rearRow, rearCol);
 
-				index++;
+				return;			
 			}
+
 		}
 	}
 
+	void make_stone3(int mcase , int[] fr, int[] fc, int[]rr, int[] rc) throws IOException {
+		int r1,c1,r2=0,c2=0;
+
+		if(mcase<3) {
+			r1 = fr[0]; c1 = fc[0];
+		}
+		else if(mcase<5) {
+			r1 = fr[1]; c1 = fc[1];
+		}
+		else {
+			r1 = fr[2]; c1 = fc[2];
+		}
+
+
+		if(mcase%3 ==0) {
+			r2 = rr[0]; c2 = rc[0];
+		}
+		if(mcase%3==1) {
+			r2 = rr[1]; c2 = rc[1];
+		}
+		if(mcase%3==2) {
+			r2 = rr[2]; c2 = rc[2];
+		}
+
+		stone3(r1,c1,5);
+		stone3(r2,c2,5);
+	}
+
+
+	int findBlank(int i, int j, int way){
+		int blank=0;
+		int[] unit = new int[6];
+		int k=0;
+
+		if (way==0) 
+			unit=copyToColUnit(unit,i,j);
+
+		else if (way==1) //row
+			unit=copyToRowUnit(unit,i,j);
+
+		else if (way==2) //dia1
+			unit=copyToDia1Unit(unit,i,j);
+
+		else if (way==3)//dia2
+			unit=copyToDia2Unit(unit,i,j);
+
+
+		for(k=0;k<3;k++) {
+			if(unit[k]==0) {
+				blank=k;
+			}
+		}
+		System.out.println("blank : " + blank);
+		return blank;
+	}
+
+	void stone3(int row, int col ,double score) throws IOException {
+		if(checkMust(row,col,score)) {
+			scoreMap[row][col]=scoreMust(scoreMap[row][col],score);
+			writer.append("(" +row+ "," + col + ") aboutEne3 "+ score+"\n");
+			return;
+		}
+	}
+
+
+
+	int findMax(double[] score) {
+		int index=0;
+		double max=0;
+
+		for(int i=0;i<6;i++) {
+			if(max<score[i]) {
+				max = score[i];
+				index = i;
+			}
+		}
+		return index;
+	}
+
+	double[] makeScore(int[] fr, int[] fc, int[] rr, int[] rc) {
+		double[] s = new double[6];
+		s[0]=scoreCase(fr[0],fc[0])+scoreCase(rr[0],rc[0]);
+		s[1]=scoreCase(fr[0],fc[0])+scoreCase(rr[1],rc[1]);
+		s[2]=scoreCase(fr[0],fc[0]) + scoreCase(rr[2],rc[2]);
+		s[3]=scoreCase(fr[1],fc[1]) + scoreCase(rr[0],rc[0]);
+		s[4]=scoreCase(fr[1],fc[1]) + scoreCase(rr[1],rc[1]);
+		s[5]=scoreCase(fr[2],fc[2]) + scoreCase(rr[2],rc[2]);
+
+		return s;
+	}
+
+	double scoreCase(int row, int col) {
+		double score = 0;
+		if(0<=col&&col<19&&0<=row&&row<19) {//범위검사
+			if(map[row][col]==0)
+				return scoreMap[row][col];
+		}
+		return score;
+	}
 
 	int[]copyToColUnit(int[]unit, int row, int col){
 		if(col<map.length-6+1) {

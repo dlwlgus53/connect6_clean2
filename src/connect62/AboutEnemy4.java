@@ -345,7 +345,7 @@ public class AboutEnemy4 extends CheckNScore {
 							return;
 						}
 
-						if(blank==0) {//연속 4개안에 돌이 없으면
+						if(blank==0) {//연속 4개
 							double case1=0;
 							double case2=0;
 							double case3=0;
@@ -365,7 +365,7 @@ public class AboutEnemy4 extends CheckNScore {
 								stone4(i-5,j-5,4.4);
 							}
 							else if(maxCase ==3) {
-								stone4(i+2,j+22,4.4);
+								stone4(i+2,j+2,4.4);
 								stone4(i-4,j-4,4.4);
 							}
 							return;			

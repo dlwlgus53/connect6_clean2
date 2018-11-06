@@ -139,7 +139,7 @@ public class Row extends CheckNScore{
 						for(tempi=i;tempi<i+6;tempi++) {
 							if(check(tempi,j)) {
 								writer.append("(" + tempi + "," + j + ") row findmy1 "+ 30 +"\n");
-								scoreMap[tempi][j]+=20;//�� �� ��ó�� 20�� �帳�ϴ�~
+								scoreMap[tempi][j]+=30;
 							}
 
 						}
@@ -147,8 +147,8 @@ public class Row extends CheckNScore{
 					case 2 : 
 						for(tempi=i;tempi<i+6;tempi++) {
 							if(check(tempi,j)) {
-								scoreMap[tempi][j]+=20;//6�� �ȿ� 2�� ������ �� �� ��ó�� 20�� �帳�ϴ�~
-								writer.append("(" + tempi + "," + j + ") row findmy2 "+ 40 +"\n");
+								scoreMap[tempi][j]+=100;//6�� �ȿ� 2�� ������ �� �� ��ó�� 20�� �帳�ϴ�~
+								writer.append("(" + tempi + "," + j + ") row findmy2 "+ 100 +"\n");
 							}
 						} 
 						break;
@@ -156,8 +156,8 @@ public class Row extends CheckNScore{
 					case 3 : 
 						for(tempi=i;tempi<i+6;tempi++) {
 							if(check(tempi,j)) { 
-								scoreMap[tempi][j]+=100;//6ĭ�� 3�����ְ� ���� �� ������ 100���ݴϴ�.
-								writer.append("(" + tempi + "," + j + ") row findmy2 "+ 100 +"\n");
+								scoreMap[tempi][j]+=200;//6ĭ�� 3�����ְ� ���� �� ������ 100���ݴϴ�.
+								writer.append("(" + tempi + "," + j + ") row findmy2 "+ 200 +"\n");
 							}
 						}
 						break;
@@ -208,8 +208,8 @@ public class Row extends CheckNScore{
 					case 1:
 						for(tempi=i;tempi<i+6;tempi++) {
 							if(check(tempi,j)) {
-								scoreMap[tempi][j]+=10;
-								writer.append("(" + tempi + "," + j + ") row findene1 "+ 10 +"\n");
+								scoreMap[tempi][j]+=0;
+								writer.append("(" + tempi + "," + j + ") row findene1 "+ 0 +"\n");
 							}
 						}
 						break;

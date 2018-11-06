@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class FindTwoEnemy3 extends CheckNScore{
+public class FindTwoEnemy3 extends findBetter{
 	double[][]scoreMap;
 	int[][]map;
 	int myColor;
@@ -264,6 +264,11 @@ public class FindTwoEnemy3 extends CheckNScore{
 
 				rearRow[0] = i;	rearRow[1] = i; rearRow[2] = i;
 				rearCol[0] = j+3;	rearCol[1] = j+4; rearCol[2] = j+5;
+			
+				if(map[i][j-1]==myColor) {
+					return;
+				}
+				
 
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 
@@ -280,8 +285,8 @@ public class FindTwoEnemy3 extends CheckNScore{
 			blank=findBlank(i,j,1);
 			System.out.println("blank : " + blank);
 			if(blank!=0) {
-				blankRow = i;
-				blankCol = j+blank;
+				blankRow = i+blank;
+				blankCol = j;
 				stone3(blankRow, blankCol, 5.2);
 				return;
 			}
@@ -293,6 +298,10 @@ public class FindTwoEnemy3 extends CheckNScore{
 
 				rearRow[0] = i+3;	rearRow[1] = i+4; rearRow[2] = i+5;
 				rearCol[0] = j;	rearCol[1] = j; rearCol[2] = j;
+				
+				if(map[i-1][j]==myColor) {
+					return;
+				}
 
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 
@@ -311,7 +320,7 @@ public class FindTwoEnemy3 extends CheckNScore{
 			blank=findBlank(i,j,2);
 
 			if(blank!=0) {
-				blankRow = i;
+				blankRow = i-blank;
 				blankCol = j+blank;
 				stone3(blankRow, blankCol, 5.3);
 				return;
@@ -324,6 +333,11 @@ public class FindTwoEnemy3 extends CheckNScore{
 
 				rearRow[0] = i-3;	rearRow[1] = i-4; rearRow[2] = i-5;
 				rearCol[0] = j+3;	rearCol[1] = j+4; rearCol[2] = j+5;
+				
+				if(map[i+1][j-1]==myColor) {
+					return;
+				}
+				
 
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 
@@ -341,8 +355,8 @@ public class FindTwoEnemy3 extends CheckNScore{
 			blank=findBlank(i,j,3);
 
 			if(blank!=0) {
-				blankRow = i;
-				blankCol = j+blank;
+				blankRow = i-blank;
+				blankCol = j-blank;
 				stone3(blankRow, blankCol, 5.4);
 				return;
 			}
@@ -354,12 +368,16 @@ public class FindTwoEnemy3 extends CheckNScore{
 
 				rearRow[0] = i-3;	rearRow[1] = i-4; rearRow[2] = i-5;
 				rearCol[0] = j-3;	rearCol[1] = j-4; rearCol[2] = j-5;
-
+				
+				if(map[i+1][j+1]==enemyColor) {
+					return;
+				}
+				
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 
 
 				int maxCase = findMax(score);
-
+				
 				make_stone3(maxCase, frontRow, frontCol, rearRow, rearCol);
 
 				return;			
@@ -382,13 +400,13 @@ public class FindTwoEnemy3 extends CheckNScore{
 		}
 
 
-		if(mcase%3 ==0) {
+		if(mcase ==0&& mcase ==3 && mcase == 5) {
 			r2 = rr[0]; c2 = rc[0];
 		}
-		if(mcase%3==1) {
+		if(mcase==1 && mcase==4) {
 			r2 = rr[1]; c2 = rc[1];
 		}
-		if(mcase%3==2) {
+		if(mcase==2) {
 			r2 = rr[2]; c2 = rc[2];
 		}
 
@@ -454,70 +472,11 @@ public class FindTwoEnemy3 extends CheckNScore{
 		s[2]=scoreCase(fr[0],fc[0]) + scoreCase(rr[2],rc[2]);
 		s[3]=scoreCase(fr[1],fc[1]) + scoreCase(rr[0],rc[0]);
 		s[4]=scoreCase(fr[1],fc[1]) + scoreCase(rr[1],rc[1]);
-		s[5]=scoreCase(fr[2],fc[2]) + scoreCase(rr[2],rc[2]);
+		s[5]=scoreCase(fr[2],fc[2]) + scoreCase(rr[0],rc[0]);
 
 		return s;
 	}
 
-	double scoreCase(int row, int col) {
-		double score = 0;
-		if(0<=col&&col<19&&0<=row&&row<19) {//범위검사
-			if(map[row][col]==0)
-				return scoreMap[row][col];
-		}
-		return score;
-	}
 
-	int[]copyToColUnit(int[]unit, int row, int col){
-		if(col<map.length-6+1) {
-			int k=0;
-			unit[k] = map[row][col];
-			unit[k+1]=map[row][col+1];
-			unit[k+2]=map[row][col+2];
-			unit[k+3]=map[row][col+3];
-			unit[k+4]=map[row][col+4];
-			unit[k+5]=map[row][col+5];
-		}
-		return unit;
-	}
 
-	int[]copyToRowUnit(int[]unit, int row, int col){
-		if(row<map.length-6+1) {
-			int k=0;
-			unit[k] = map[row][col];
-			unit[k+1]=map[row+1][col];
-			unit[k+2]=map[row+2][col];
-			unit[k+3]=map[row+3][col];
-			unit[k+4]=map[row+4][col];
-			unit[k+5]=map[row+5][col];
-		}
-
-		return unit;
-	}
-
-	int[]copyToDia1Unit(int[]unit, int row, int col){
-		if(row>=5&& col<=map.length-6) {
-			int k=0;
-			unit[k] = map[row][col];
-			unit[k+1]=map[row-1][col+1];
-			unit[k+2]=map[row-2][col+2];
-			unit[k+3]=map[row-3][col+3];
-			unit[k+4]=map[row-4][col+4];
-			unit[k+5]=map[row-5][col+5];
-		}
-		return unit;
-	}
-
-	int[]copyToDia2Unit(int[]unit, int row, int col){
-		if(row>5&&col>5) {
-			int k=0;
-			unit[k] = map[row][col];
-			unit[k+1]=map[row-1][col-1];
-			unit[k+2]=map[row-2][col-2];
-			unit[k+3]=map[row-3][col-3];
-			unit[k+4]=map[row-4][col-4];
-			unit[k+5]=map[row-5][col-5];
-		}
-		return unit;
-	}
 }

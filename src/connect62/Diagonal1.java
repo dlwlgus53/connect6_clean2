@@ -135,7 +135,7 @@ public class Diagonal1 extends CheckNScore{
 						for(tempj=j,tempi=i;tempj<j+6&&tempi>i-6 ;tempj++,tempi--) {
 
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=20;//�� �� ��ó�� 20�� �帳�ϴ�~
+								scoreMap[tempi][tempj]+=30;//�� �� ��ó�� 20�� �帳�ϴ�~
 								writer.append("(" + tempi + "," + tempj + ") dia1 findmy1 "+ 30 +"\n");
 							}
 						}
@@ -143,8 +143,8 @@ public class Diagonal1 extends CheckNScore{
 					case 2 : 
 						for(tempj=j,tempi=i;tempj<j+6&&tempi>i-6 ;tempj++,tempi--) {
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=20;
-								writer.append("(" + tempi + "," + tempj + ") dia1 findmy2 "+ 40 +"\n");
+								scoreMap[tempi][tempj]+=100;
+								writer.append("(" + tempi + "," + tempj + ") dia1 findmy2 "+ 100 +"\n");
 							}
 						}
 						break;
@@ -153,8 +153,8 @@ public class Diagonal1 extends CheckNScore{
 
 						for(tempj=j,tempi=i;tempj<j+6&&tempi>i-6 ;tempj++,tempi--) {
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=100;
-								writer.append("(" + tempi + "," + tempj + ") dia1 findmy3 "+ 100 +"\n");
+								scoreMap[tempi][tempj]+=200;
+								writer.append("(" + tempi + "," + tempj + ") dia1 findmy3 "+ 200 +"\n");
 							}
 						}
 						break;
@@ -210,8 +210,8 @@ public class Diagonal1 extends CheckNScore{
 					case 1:
 						for(tempj=j,tempi=i;tempj<j+6;tempj++,tempi--) {
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=10;
-								writer.append("(" + tempi + "," + tempj + ") dia1 findene1 "+ 10 +"\n");
+								scoreMap[tempi][tempj]+=0;
+								writer.append("(" + tempi + "," + tempj + ") dia1 findene1 "+ 0 +"\n");
 							}
 
 

@@ -140,7 +140,7 @@ public class Column extends CheckNScore {
 					case 1 : 
 						for(tempj=j;tempj<j+6;tempj++) {
 							if(check(i,tempj)) {
-								scoreMap[i][tempj]+=20;
+								scoreMap[i][tempj]+=30;
 								writer.append("(" + i + "," + tempj + ") col findmy1 "+ 30 +"\n");
 							}
 						}
@@ -148,8 +148,8 @@ public class Column extends CheckNScore {
 					case 2 : 
 						for(tempj=j;tempj<j+6;tempj++) {
 							if(check(i,tempj)) {
-								scoreMap[i][tempj]+=20;
-								writer.append("(" + i + "," + tempj + ") col findmy2 "+ 40 +"\n");
+								scoreMap[i][tempj]+=100;
+								writer.append("(" + i + "," + tempj + ") col findmy2 "+ 100 +"\n");
 							}
 						} 
 						break;
@@ -157,8 +157,8 @@ public class Column extends CheckNScore {
 					case 3 : 
 						for(tempj=j;tempj<j+6;tempj++) {
 							if(check(i,tempj)) {
-								scoreMap[i][tempj]+=100;
-								writer.append("(" + i + "," + tempj + ") col findmy3 "+ 100 +"\n");
+								scoreMap[i][tempj]+=200;
+								writer.append("(" + i + "," + tempj + ") col findmy3 "+ 200 +"\n");
 							}
 						}
 						break;
@@ -205,7 +205,7 @@ public class Column extends CheckNScore {
 					case 1:
 						for(tempj=j;tempj<j+6;tempj++) {
 							if(check(i,tempj)) {
-								scoreMap[i][tempj]+=10;
+								scoreMap[i][tempj]+=0;
 
 							}
 						}

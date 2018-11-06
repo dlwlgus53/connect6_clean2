@@ -133,7 +133,7 @@ public class Diagonal2 extends CheckNScore{
 						for(tempj=j,tempi=i;tempi>i-6&&tempj>j-6 ;tempi--,tempj--) {
 
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=20;//�� �� ��ó�� 20�� �帳�ϴ�~
+								scoreMap[tempi][tempj]+=30;//�� �� ��ó�� 20�� �帳�ϴ�~
 								writer.append("(" + tempi + "," + tempj + ") dia2 findmy1 "+ 30 +"\n");
 							}
 						}
@@ -141,8 +141,8 @@ public class Diagonal2 extends CheckNScore{
 					case 2 : 
 						for(tempj=j,tempi=i;tempi>i-6&&tempj>j-6 ;tempi--,tempj--) {
 							if(check(tempi,tempj)){
-								scoreMap[tempi][tempj]+=20;//�� �� ��ó�� 20�� �帳�ϴ�~
-								writer.append("(" + tempi + "," + tempj + ") dia2 findmy2 "+ 40 +"\n");
+								scoreMap[tempi][tempj]+=100;//�� �� ��ó�� 20�� �帳�ϴ�~
+								writer.append("(" + tempi + "," + tempj + ") dia2 findmy2 "+ 100 +"\n");
 							}
 						}
 						break;
@@ -150,8 +150,8 @@ public class Diagonal2 extends CheckNScore{
 					case 3 : 
 						for(tempj=j,tempi=i;tempi>i-6&&tempj>j-6 ;tempi--,tempj--) {
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=100;//�� �� ��ó�� 100�� �帳�ϴ�~
-								writer.append("(" + tempi + "," + tempj + ") dia2 findmy3 "+ 100 +"\n");
+								scoreMap[tempi][tempj]+=200;//�� �� ��ó�� 100�� �帳�ϴ�~
+								writer.append("(" + tempi + "," + tempj + ") dia2 findmy3 "+ 200 +"\n");
 							}
 						}
 						break;
@@ -204,8 +204,8 @@ public class Diagonal2 extends CheckNScore{
 					case 1:
 						for(tempj=j,tempi=i;tempi>i-6;tempi--,tempj--) {
 							if(check(tempi,tempj)) {
-								scoreMap[tempi][tempj]+=10;
-								writer.append("(" + tempi + "," + tempj + ") dia2 findene1 "+ 10 +"\n");
+								scoreMap[tempi][tempj]+=0;
+								writer.append("(" + tempi + "," + tempj + ") dia2 findene1 "+ 0 +"\n");
 							}
 
 						}

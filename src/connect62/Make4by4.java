@@ -27,6 +27,10 @@ public class Make4by4 extends CheckNScore{
 		findMine();
 		return scoreMap;
 	}
+	
+	void col() {
+		
+	}
 
 
 	void findMine() throws IOException {
@@ -69,13 +73,12 @@ public class Make4by4 extends CheckNScore{
 				int tempi=i;
 				int tempj=j;
 				int targetNumber=0;
-				boolean target[]= new boolean[4];//44�� ����������� 33�� ���� �־���ϴϱ� 33�� �ִ� Ÿ���� ã�ƺ��°���
-				//target0==col target1==row target2==dia1 targe3==dia2
+				boolean target[]= new boolean[4];
 
-				if(isEnemyCol==false&&colCount==3) target[0]=true; else target[0]=false;
-				if(isEnemyRow==false&&rowCount==3) target[1]=true; else target[1]=false;
-				if(isEnemyDia1==false&&dia1Count==3) target[2]=true; else target[2]=false;
-				if(isEnemyDia2==false&&dia2Count==3) target[3]=true; else target[3]=false;
+				if(isEnemyCol==false&&colCount==2) target[0]=true; else target[0]=false;
+				if(isEnemyRow==false&&rowCount==2) target[1]=true; else target[1]=false;
+				if(isEnemyDia1==false&&dia1Count==2) target[2]=true; else target[2]=false;
+				if(isEnemyDia2==false&&dia2Count==2) target[3]=true; else target[3]=false;
 
 
 				int temp;//variable for iterate

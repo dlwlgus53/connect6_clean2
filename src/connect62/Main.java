@@ -22,18 +22,26 @@ public class Main {
 		}
 		else if(myColor == 1){
 			System.out.println("oh! me white! you start first");
+			enemyInput(map,myColor);
+			map[8][8] = 1;
+			map[8][9] = 1;
+			
+			System.out.println("first Row : " + 8 +" frist Col : " + 8);
+			System.out.println("second Row : " + 8 +" second Col : " + 9);
+			
+			
 		}
-		Compute compute = new Compute(map,myColor);
-		//here is for debug
 		
-		/*map[9][8]=-1;
+		Compute compute = new Compute(map,myColor);
+		////here is for debug
+		
 		map[9][9]=-1;
-		map[9][10] = -1;
-		map[9][11] = -1;
-		map[8][13] = 1;
-		map[7][13] = 1;
-		map[6][13] = 1;*/
-				
+		  map[9][8]=-1;
+		
+		  map[8][9] = -1;
+		  map[8][8] = -1;
+		  
+		
 		
 		
 		while(true) {

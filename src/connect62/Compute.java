@@ -14,6 +14,7 @@ public class Compute {
 	Row row;
 	Diagonal2 diagonal2;
 	Make4by4 make4by4;
+	Make3by3 make3by3;
 	AboutEnemy3 aboutEnemy3;
 	FileWriter writer;
 	FileWriter mapWriter;
@@ -29,10 +30,14 @@ public class Compute {
 		diagonal1 = new Diagonal1(map, scoreMap, myColor, writer);
 		row = new Row(map, scoreMap, myColor, writer);
 		diagonal2 = new Diagonal2(map, scoreMap, myColor, writer);
+		
 		make4by4 = new Make4by4(map, scoreMap, myColor, writer);
+		make3by3 = new Make3by3(map, scoreMap, myColor, writer);
+		
 		aboutEnemy3 = new AboutEnemy3(map, scoreMap, myColor, writer);
 		findTwoEnemy3 = new FindTwoEnemy3(map, scoreMap, myColor, writer);
 		aboutEnemy4 = new AboutEnemy4(map, scoreMap, myColor, writer);
+		
 
 	}
 
@@ -48,7 +53,8 @@ public class Compute {
 		scoreMap = row.execute(map, scoreMap, myColor, writer);
 		scoreMap = diagonal2.execute(map, scoreMap, myColor, writer);
 		scoreMap = make4by4.execute(map, scoreMap, myColor, writer);
-		scoreMap = aboutEnemy3.execute(map, scoreMap, myColor, writer);
+		scoreMap = make3by3.execute(map, scoreMap, myColor, writer);
+		//scoreMap = aboutEnemy3.execute(map, scoreMap, myColor, writer);
 		scoreMap = findTwoEnemy3.execute(map, scoreMap, myColor, writer);
 		scoreMap = aboutEnemy4.execute(map, scoreMap, myColor, writer);
 
@@ -67,16 +73,6 @@ public class Compute {
 		return;
 	}
 
-	void scoreUpdate() throws IOException {
-		scoreMap=column.execute(map, scoreMap, myColor, writer);
-		scoreMap=diagonal1.execute(map, scoreMap, myColor, writer);
-		scoreMap = row.execute(map, scoreMap, myColor, writer);
-		scoreMap = diagonal2.execute(map, scoreMap, myColor, writer);
-		scoreMap = make4by4.execute(map, scoreMap, myColor, writer);
-		scoreMap = aboutEnemy3.execute(map, scoreMap, myColor, writer);
-		scoreMap = findTwoEnemy3.execute(map, scoreMap, myColor, writer);
-		return;
-	}
 
 
 

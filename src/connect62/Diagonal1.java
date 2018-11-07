@@ -37,7 +37,7 @@ public class Diagonal1 extends CheckNScore{
 		for(int i=5;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToDia1Unit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -74,7 +74,7 @@ public class Diagonal1 extends CheckNScore{
 		for(int i=5;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToDia1Unit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -113,7 +113,7 @@ public class Diagonal1 extends CheckNScore{
 		for(int i=5;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToDia1Unit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -183,7 +183,7 @@ public class Diagonal1 extends CheckNScore{
 		for(int i=5;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToDia1Unit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -266,7 +266,7 @@ public class Diagonal1 extends CheckNScore{
 		for(int i=5;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToDia1Unit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -349,18 +349,7 @@ public class Diagonal1 extends CheckNScore{
 
 
 
-	int[]copyToUnit(int[]unit, int row, int col){
 
-		int k=0;
-		unit[k] = map[row][col];
-		unit[k+1]=map[row-1][col+1];
-		unit[k+2]=map[row-2][col+2];
-		unit[k+3]=map[row-3][col+3];
-		unit[k+4]=map[row-4][col+4];
-		unit[k+5]=map[row-5][col+5];
-
-		return unit;
-	}
 
 
 }

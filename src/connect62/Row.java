@@ -38,7 +38,7 @@ public class Row extends CheckNScore{
 		for(int i=0;i<map.length-6+1;i++) {
 			for(int j=0;j<map.length;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToRowUnit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -76,7 +76,7 @@ public class Row extends CheckNScore{
 		for(int i=0;i<map.length-6+1;i++) {
 			for(int j=0;j<map.length;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToRowUnit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -117,7 +117,7 @@ public class Row extends CheckNScore{
 		for(int i=0;i<map.length-6+1;i++) {
 			for(int j=0;j<map.length;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToRowUnit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -183,7 +183,7 @@ public class Row extends CheckNScore{
 		for(int i=0;i<map.length-6+1;i++) {
 			for(int j=0;j<map.length;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToRowUnit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -259,7 +259,7 @@ public class Row extends CheckNScore{
 				//if(map[i][j]==enemyColor) {//modify
 
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToRowUnit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -337,16 +337,5 @@ public class Row extends CheckNScore{
 
 
 
-	int[]copyToUnit(int[]unit, int row, int col){
 
-		int k=0;
-		unit[k] = map[row][col];
-		unit[k+1]=map[row+1][col];
-		unit[k+2]=map[row+2][col];
-		unit[k+3]=map[row+3][col];
-		unit[k+4]=map[row+4][col];
-		unit[k+5]=map[row+5][col];
-
-		return unit;
-	}
 }

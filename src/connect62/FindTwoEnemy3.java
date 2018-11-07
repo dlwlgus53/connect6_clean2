@@ -387,7 +387,7 @@ public class FindTwoEnemy3 extends findBetter{
 	}
 
 	void make_stone3(int mcase , int[] fr, int[] fc, int[]rr, int[] rc) throws IOException {
-		int r1,c1,r2=0,c2=0;
+		int r1,c1,r2,c2;
 
 		if(mcase<3) {
 			r1 = fr[0]; c1 = fc[0];
@@ -400,13 +400,13 @@ public class FindTwoEnemy3 extends findBetter{
 		}
 
 
-		if(mcase ==0&& mcase ==3 && mcase == 5) {
+		if(mcase ==0|| mcase ==3 || mcase == 5) {
 			r2 = rr[0]; c2 = rc[0];
 		}
-		if(mcase==1 && mcase==4) {
+		if(mcase==1 || mcase==4) {
 			r2 = rr[1]; c2 = rc[1];
 		}
-		if(mcase==2) {
+		else{
 			r2 = rr[2]; c2 = rc[2];
 		}
 

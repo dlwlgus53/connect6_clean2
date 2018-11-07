@@ -44,7 +44,7 @@ public class Column extends CheckNScore {
 		for(int i=0;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToColUnit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -80,7 +80,7 @@ public class Column extends CheckNScore {
 		for(int i=0;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToColUnit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -119,7 +119,7 @@ public class Column extends CheckNScore {
 		for(int i=0;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToColUnit(unit,i,j);
 
 				int k=0;
 				int count=0; 
@@ -180,7 +180,7 @@ public class Column extends CheckNScore {
 		for(int i=0;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToColUnit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -259,7 +259,7 @@ public class Column extends CheckNScore {
 		for(int i=0;i<map.length;i++) {
 			for(int j=0;j<map.length-6+1;j++) {
 
-				unit=copyToUnit(unit,i,j);
+				unit=copyToColUnit(unit,i,j);
 
 				int k=0;
 				int count=0;
@@ -333,18 +333,6 @@ public class Column extends CheckNScore {
 	}
 
 
-	int[]copyToUnit(int[]unit, int row, int col){
-
-		int k=0;
-		unit[k] = map[row][col];
-		unit[k+1]=map[row][col+1];
-		unit[k+2]=map[row][col+2];
-		unit[k+3]=map[row][col+3];
-		unit[k+4]=map[row][col+4];
-		unit[k+5]=map[row][col+5];
-
-		return unit;
-	}
 	double scoreCase(int row, int col) {
 		double score = 0;
 		if(0<=col&&col<19&&0<=row&&row<19) {//범위검사

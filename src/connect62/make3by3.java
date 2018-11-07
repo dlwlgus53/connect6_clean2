@@ -36,23 +36,23 @@ public class Make3by3 extends findBetter{
 	}
 
 	void find() throws IOException{
+		int size=0;
+		int row=0,col=0, way=0;
+		
 		colTargetCheck();
 		rowTargetCheck();
 		dia1TargetCheck();
 		dia2TargetCheck();
+		size = targetRow.size();
 		
-		if(targetRow.size()>=2) {
-		int row = targetRow.get(0);
-		int col = targetCol.get(0);
-		int way = targetWay.get(0);
-		System.out.println("3");
-		setStone(row, col, way);
-		System.out.println("4");
-		row = targetRow.get(1);
-		col = targetCol.get(1);
-		way = targetWay.get(1);
-		setStone(row, col, way);
-		System.out.println("5");
+		if(size>=2) {
+			for(int i=0;i<size;i++) {
+				row = targetRow.get(i);
+				col = targetCol.get(i);
+				way = targetWay.get(i);
+				
+				makeStone(row, col, way);
+			}
 		}
 	}
 
@@ -83,7 +83,6 @@ public class Make3by3 extends findBetter{
 					targetRow.add(i);
 					targetCol.add(j);
 					targetWay.add(0);
-					return;
 				}
 
 			}
@@ -121,7 +120,7 @@ public class Make3by3 extends findBetter{
 					targetRow.add(i);
 					targetCol.add(j);
 					targetWay.add(1);
-					return;
+					
 				}
 			}
 
@@ -129,7 +128,6 @@ public class Make3by3 extends findBetter{
 
 		return;
 	}
-
 
 	void dia1TargetCheck() {
 
@@ -161,7 +159,7 @@ public class Make3by3 extends findBetter{
 					targetRow.add(i);
 					targetCol.add(j);
 					targetWay.add(2);
-					return;
+					
 
 				}
 			}
@@ -197,7 +195,7 @@ public class Make3by3 extends findBetter{
 					targetRow.add(i);
 					targetCol.add(j);
 					targetWay.add(3);
-					return;
+					
 				}
 			}
 
@@ -207,29 +205,39 @@ public class Make3by3 extends findBetter{
 
 	}
 
-
-
-	void setStone(int i, int j, int way) throws IOException{
-		System.out.println("1");
-		int[] point1 = new int[2];
-		System.out.println("2");
-		double score1=0;
-		System.out.println("8");
+	void makeStone(int i, int j, int way) throws IOException{
 		
+		int[] point1 = new int[2];
+
+		double score1=0;
+			
 		double score2=0;
-		System.out.println("9");
+	
 		int[] point2 = new int[2];
-		System.out.println("2");
+	
 		int index=0;
 
 		if(way==0) {//col]
 				index = findStone(i,j,way);
 
-				point1 = colNext(i,j,index);
+				point1 = colNext(i,j,index+1);
 				score1 = getScore(point1[0],point1[1]);
 
 				point2 = colNext(i,j, index-2);
 				score2 = getScore(point2[0],point2[1]);
+				
+
+				if(score1>score2) {
+					setStone(point1[0],point1[1],8.0,0);
+					return;
+					
+				}
+				
+				else {
+				
+					setStone(point2[0],point2[1],8.0,0);
+					return;
+				}
 
 
 		}
@@ -237,22 +245,48 @@ public class Make3by3 extends findBetter{
 		else if(way==1) {//row
 			index = findStone(i,j,way);
 
-			point1 = rowNext(i,j,index);
+			point1 = rowNext(i,j,index+1);
 			score1 = getScore(point1[0],point1[1]);
 
 			point2 = rowNext(i,j, index-2);
 			score2 = getScore(point2[0],point2[1]);
+			
+
+			if(score1>score2) {
+				setStone(point1[0],point1[1],8.0,1);
+				return;
+				
+			}
+			
+			else {
+			
+				setStone(point2[0],point2[1],8.0,1);
+				return;
+			}
 		}
 		
 
 		else if(way==2) {//dai1
 			index = findStone(i,j,way);
 
-			point1 = dia1Next(i,j,index);
+			point1 = dia1Next(i,j,index+1);
 			score1 = getScore(point1[0],point1[1]);
 
 			point2 = dia1Next(i,j, index-2);
 			score2 = getScore(point2[0],point2[1]);
+			
+
+			if(score1>score2) {
+				setStone(point1[0],point1[1],8.0,2);
+				return;
+				
+			}
+			
+			else {
+			
+				setStone(point2[0],point2[1],8.0,2);
+				return;
+			}
 
 		}
 		
@@ -260,27 +294,28 @@ public class Make3by3 extends findBetter{
 		else {//dai2
 			index = findStone(i,j,way);
 
-			point1 = dia2Next(i,j,index);
+			point1 = dia2Next(i,j,index+1);
 			score1 = getScore(point1[0],point1[1]);
 
 			point2 = dia2Next(i,j, index-2);
 			score2 = getScore(point2[0],point2[1]);
-		}
-		
-		
-		
-		if(score1>score2) {
-			System.out.println("6");
-			setStone(point1[0],point1[1],8);
-			return;
 			
+
+			if(score1>score2) {
+				setStone(point1[0],point1[1],8.0,3);
+				return;
+				
+			}
+			
+			else {
+			
+				setStone(point2[0],point2[1],8.0,3);
+				return;
+			}
 		}
 		
-		else {
-			System.out.println("5");
-			setStone(point2[0],point2[1],8);
-			return;
-		}
+		
+		
 
 	}
 
@@ -300,15 +335,32 @@ public class Make3by3 extends findBetter{
 		return index;
 	}
 
-	void setStone(int row, int col, double score) throws IOException{
-		if(checkMust(row,col,score)) {
+	void setStone(int row, int col, double score,int way) throws IOException{
+		if(way==0&&checkMust(row,col,score)) {
 			scoreMap[row][col]=scoreMust(scoreMap[row][col],score);
-			writer.append("(" +row+ "," + col + ") makeMy3 "+ score+"\n");
+			writer.append("(" +row+ "," + col + ") col makeMy3 "+ score+"\n");
+			return;
+		}
+		
+		else if(way==1&&checkMust(row,col,score)) {
+			scoreMap[row][col]=scoreMust(scoreMap[row][col],score);
+			writer.append("(" +row+ "," + col + ") row makeMy3 "+ score+"\n");
+			return;
+		}
+		
+		else if(way==2&&checkMust(row,col,score)) {
+			scoreMap[row][col]=scoreMust(scoreMap[row][col],score);
+			writer.append("(" +row+ "," + col + ") dia1 makeMy3 "+ score+"\n");
+			return;
+		}
+		
+		else if(way==3&&checkMust(row,col,score)) {
+			scoreMap[row][col]=scoreMust(scoreMap[row][col],score);
+			writer.append("(" +row+ "," + col + ") dia2 makeMy3 "+ score+"\n");
 			return;
 		}
 
 	}
-
 
 	int findStone(int i, int j, int way){
 		int stone=0;
@@ -329,14 +381,12 @@ public class Make3by3 extends findBetter{
 
 
 		for(k=0;k<6;k++) {
-			if(unit[k]==1) {
+			if(unit[k]==myColor) {
 				stone=k;
 			}
 		}
 		return stone;
 	}
-
-
 
 
 

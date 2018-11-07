@@ -9,6 +9,7 @@ public class Main {
 	static int mapSize = 19;
 
 	public static void main(String[] args) throws IOException {
+		System.out.println("connect62_clean version\n\n");
 		int[][] map = new int[mapSize][mapSize];
 		makeClean(map);	
 
@@ -35,12 +36,15 @@ public class Main {
 		Compute compute = new Compute(map,myColor);
 		////here is for debug
 		
-		map[9][9]=-1;
+		/*map[9][9]=-1;
 		  map[9][8]=-1;
 		
 		  map[8][9] = -1;
 		  map[8][8] = -1;
 		  
+		  map[5][8]=1;
+		  map[5][9]=1;
+		  */
 		
 		
 		

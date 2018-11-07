@@ -44,6 +44,7 @@ public class Compute {
 
 
 	public void execute() throws IOException{
+		
 		makeClean(scoreMap);
 		FileWriter writer = new FileWriter("log.txt");
 		checkAlreadyDone();

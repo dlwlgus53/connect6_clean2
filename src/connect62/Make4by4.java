@@ -22,6 +22,7 @@ public class Make4by4 extends findBetter{
 
 	double[][] execute(int[][] map,double[][]scoreMap,int myColor,FileWriter writer) throws IOException {
 		this.map = map;
+	
 		this.scoreMap = scoreMap;
 		this.myColor = myColor;
 		enemyColor = myColor*-1;

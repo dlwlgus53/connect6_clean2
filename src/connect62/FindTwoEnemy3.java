@@ -264,14 +264,20 @@ public class FindTwoEnemy3 extends findBetter{
 
 				rearRow[0] = i;	rearRow[1] = i; rearRow[2] = i;
 				rearCol[0] = j+3;	rearCol[1] = j+4; rearCol[2] = j+5;
-			
-			
-				
+
 
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
-
-
+				for(int k=0; k<6 ; k++) {
+					System.out.println("score : " + score[k]);
+				}
+				for(int k=0; k<3 ; k++) {
+					System.out.println("rearROw: " + rearRow[k]);
+				}
+				for(int k=0; k<3 ; k++) {
+					System.out.println("rearCol: " + rearCol[k]);
+				}
 				int maxCase = findMax(score);
+
 
 				make_stone3(maxCase, frontRow, frontCol, rearRow, rearCol);
 
@@ -296,8 +302,8 @@ public class FindTwoEnemy3 extends findBetter{
 
 				rearRow[0] = i+3;	rearRow[1] = i+4; rearRow[2] = i+5;
 				rearCol[0] = j;	rearCol[1] = j; rearCol[2] = j;
-				
-			
+
+
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 
 
@@ -328,8 +334,8 @@ public class FindTwoEnemy3 extends findBetter{
 
 				rearRow[0] = i-3;	rearRow[1] = i-4; rearRow[2] = i-5;
 				rearCol[0] = j+3;	rearCol[1] = j+4; rearCol[2] = j+5;
-				
-				
+
+
 
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 
@@ -360,14 +366,14 @@ public class FindTwoEnemy3 extends findBetter{
 
 				rearRow[0] = i-3;	rearRow[1] = i-4; rearRow[2] = i-5;
 				rearCol[0] = j-3;	rearCol[1] = j-4; rearCol[2] = j-5;
-				
-				
-				
+
+
+
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 
 
 				int maxCase = findMax(score);
-				
+
 				make_stone3(maxCase, frontRow, frontCol, rearRow, rearCol);
 
 				return;			
@@ -393,7 +399,7 @@ public class FindTwoEnemy3 extends findBetter{
 		if(mcase ==0|| mcase ==3 || mcase == 5) {
 			r2 = rr[0]; c2 = rc[0];
 		}
-		if(mcase==1 || mcase==4) {
+		else if(mcase==1 || mcase==4) {
 			r2 = rr[1]; c2 = rc[1];
 		}
 		else{
@@ -452,6 +458,7 @@ public class FindTwoEnemy3 extends findBetter{
 				index = i;
 			}
 		}
+		System.out.println("index : " + index);
 		return index;
 	}
 

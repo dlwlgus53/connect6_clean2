@@ -146,6 +146,9 @@ public class AboutEnemy4 extends findBetter{
 						if(unit[k]==enemyColor)
 							count++;
 					}
+					
+					if(unit[5]==enemyColor)
+						return;
 
 					if(isMine==false&&count==4) {
 						for(k=0;k<6;k++) {
@@ -268,6 +271,9 @@ public class AboutEnemy4 extends findBetter{
 						if(unit[k]==enemyColor)
 							count++;
 					}
+					
+					if(unit[5]==enemyColor)
+						return;
 
 					if(isMine==false&&count==4) {
 						for(k=0;k<6;k++) {
@@ -314,6 +320,8 @@ public class AboutEnemy4 extends findBetter{
 						if(unit[k]==enemyColor)
 							count++;
 					}
+					
+					
 
 					if(isMine==false&&count==4) {
 						for(k=0;k<4;k++) {
@@ -385,6 +393,9 @@ public class AboutEnemy4 extends findBetter{
 						if(unit[k]==enemyColor)
 							count++;
 					}
+					
+					if(unit[5]==enemyColor)
+						return;
 
 					if(isMine==false&&count==4) {
 						for(k=0;k<6;k++) {
@@ -521,6 +532,8 @@ public class AboutEnemy4 extends findBetter{
 						if(unit[k]==enemyColor)
 							count++;
 					}
+					if(unit[5]==enemyColor)
+						return;
 
 					if(isMine==false&&count==4) {
 						for(k=0;k<6;k++) {

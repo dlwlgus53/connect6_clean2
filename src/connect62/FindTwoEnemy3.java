@@ -265,9 +265,7 @@ public class FindTwoEnemy3 extends findBetter{
 				rearRow[0] = i;	rearRow[1] = i; rearRow[2] = i;
 				rearCol[0] = j+3;	rearCol[1] = j+4; rearCol[2] = j+5;
 			
-				if(map[i][j-1]==myColor) {
-					return;
-				}
+			
 				
 
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
@@ -299,10 +297,7 @@ public class FindTwoEnemy3 extends findBetter{
 				rearRow[0] = i+3;	rearRow[1] = i+4; rearRow[2] = i+5;
 				rearCol[0] = j;	rearCol[1] = j; rearCol[2] = j;
 				
-				if(map[i-1][j]==myColor) {
-					return;
-				}
-
+			
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 
 
@@ -334,9 +329,6 @@ public class FindTwoEnemy3 extends findBetter{
 				rearRow[0] = i-3;	rearRow[1] = i-4; rearRow[2] = i-5;
 				rearCol[0] = j+3;	rearCol[1] = j+4; rearCol[2] = j+5;
 				
-				if(map[i+1][j-1]==myColor) {
-					return;
-				}
 				
 
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
@@ -369,9 +361,7 @@ public class FindTwoEnemy3 extends findBetter{
 				rearRow[0] = i-3;	rearRow[1] = i-4; rearRow[2] = i-5;
 				rearCol[0] = j-3;	rearCol[1] = j-4; rearCol[2] = j-5;
 				
-				if(map[i+1][j+1]==enemyColor) {
-					return;
-				}
+				
 				
 				score=makeScore(frontRow, frontCol, rearRow, rearCol);
 

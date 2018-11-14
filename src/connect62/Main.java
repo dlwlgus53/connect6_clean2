@@ -78,8 +78,11 @@ public class Main {
 	}
 
 
-	private static void enemyInput(int[][]map, int comColor) {
-
+	private static void enemyInput(int[][]map, int comColor) throws IOException {
+		int[][]mapclone = new int[19][19];
+		int i; int j;
+		
+		
 		int temp=0;
 		String stemp="0";
 		String sx1 = "0", sx2="0", sy1="0", sy2="0";
@@ -89,6 +92,12 @@ public class Main {
 
 
 		while(isRight==false) {
+			for(i=0;i<19;i++) {
+				for(j=0;j<19;j++) {
+					mapclone[i][j] = map[i][j];
+				}
+			}
+			
 
 			isRight2 = false;
 			
@@ -116,21 +125,65 @@ public class Main {
 			}
 			
 			isRight3 =false;
-
+			
+			mapclone[Integer.parseInt(sx1)][Integer.parseInt(sy1)] = comColor*-1;
+			mapclone[Integer.parseInt(sx2)][Integer.parseInt(sy2)] = comColor*-1;
+			printMap2(mapclone);
+			
 			while(isRight3==false) {
-				System.out.println("did y do well?? yes : 1 ,no: 0");
+				System.out.println("did you do well?? yes : 1 ,no: 0");
 				stemp = scan.nextLine();
 				isRight3 = isStringDouble(stemp);
 			}
 			temp = Integer.parseInt(stemp);
 
-			if(temp==1)	isRight=true;	
+			if(temp==1)	isRight=true;
+			
+				
 		}
-
 
 		map[Integer.parseInt(sx1)][Integer.parseInt(sy1)] = comColor*-1;
 		map[Integer.parseInt(sx2)][Integer.parseInt(sy2)] = comColor*-1;
 
+
+
+	}
+	
+	static void printMap2(int[][] map) throws IOException{
+		System.out.print("map\n");
+		System.out.print("|  ");
+		for(int i=0;i< map.length; i++) {
+			if(i<10)
+				System.out.print(i+" |");
+			else
+				System.out.print(i-10+" |");
+		}
+		System.out.print("\n");
+		for(int i=0;i<map.length;i++){
+			if(i<10)
+				System.out.print("|"+i);
+			else
+				System.out.print("|"+(i-10));
+			for(int j=0; j<map[0].length;j++) {
+				if(map[i][j]==0) {
+					if(j==5||j==15)
+						System.out.print("|5 ");
+					else if(j==10)
+						System.out.print("|0 ");
+					else
+						System.out.print("|  ");
+				}
+				else if(map[i][j]==-1)	
+					System.out.print("|● ");
+				else if(map[i][j]==1)
+					System.out.print("|◆ ");
+			
+
+			}
+			System.out.print("\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ\n");
+		}
+	
+		return;
 
 	}
 

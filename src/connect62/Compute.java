@@ -130,6 +130,7 @@ public class Compute {
 
 	}
 	
+	
 	void printMap2(int[][] map) throws IOException{
 		System.out.print("map\n");
 		System.out.print("|  ");
